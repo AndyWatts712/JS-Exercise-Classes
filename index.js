@@ -70,6 +70,9 @@ console.log(andy.stomach);
 andy.poop();
 console.log(andy.stomach);
 andy.toString();
+
+const neo = new Person("Neo", 20);
+neo.toString();
 /*
   TASK 2
     - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
@@ -85,9 +88,42 @@ andy.toString();
 */
 
 class Car {
-
+  constructor(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gallons) {
+    this.tank += gallons;
+  }
+  drive(distance) {
+    
+    const gallonsUsed = distance/this.milesPerGallon;
+    const milesInTank = this.tank * this.milesPerGallon;
+    
+    if (milesInTank < distance) {
+      this.tank = 0;
+      this.odometer = this.odometer + milesInTank;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    } else {
+      this.tank = this.tank - gallonsUsed;
+      this.odometer += distance;
+    }
+  }
 }
 
+const myCar = new Car("Toyota", 20);
+console.log(myCar);
+myCar.fill(20);
+console.log(myCar.drive(500));
+console.log(myCar);
+myCar.fill(5);
+console.log(myCar.drive(200));
+console.log(myCar.drive(200));
+
+// myCar.fill(20);
+// console.log(myCar);
 /*
   TASK 3
     - Write a Lambdasian class.
@@ -101,8 +137,24 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-
+  constructor(attributes){
+    this.name = attributes.name;
+    this.age = attributes.age;
+    this.location = attributes.location;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}.`
+  }
 }
+
+const andyStudent = new Lambdasian({
+  name: "Andy",
+  age: 51,
+  location: "Virginia"
+})
+
+console.log(andyStudent);
+console.log(andyStudent.speak());
 
 /*
   TASK 4
