@@ -116,14 +116,12 @@ class Car {
 const myCar = new Car("Toyota", 20);
 console.log(myCar);
 myCar.fill(20);
-console.log(myCar.drive(500));
+console.log(myCar.drive(300));
+myCar.fill(15);
+console.log(myCar.drive(200));
+myCar.fill(20);
 console.log(myCar);
-myCar.fill(5);
-console.log(myCar.drive(200));
-console.log(myCar.drive(200));
 
-// myCar.fill(20);
-// console.log(myCar);
 /*
   TASK 3
     - Write a Lambdasian class.
@@ -248,9 +246,37 @@ console.log(studentAndy.sprintChallenge("js fundamentals"));
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+class ProjectManager extends Instructor{
+  constructor(attributes){
+    super(attributes);
+    // this.specialty = attributes.specialty;
+    // this.favLanguage = attributes.favLanguage;
+    // this.catchPhrase = attributes.catchPhrase;
+    this.gradClassName = attributes.gradClassName;
+    this.favInstructor = attributes.favInstructor;
+  }
 
+  standUp(slackChannel){
+    return `${this.name} announces to ${slackChannel}, @channel standy times!`;
+  }
+
+  debugsCode(studentObject, subject){
+    return `${this.name} debugs ${studentObject.name}'s code on ${subject}.`;
+  }
 }
+
+const pmTim = new ProjectManager({
+  name: "Tim",
+  age: 18,
+  location: "Portland",
+  specialty: "Web",
+  favLanguage: "Javascript",
+  gradClassName: "Web001",
+  favInstructor: "Brit"
+});
+
+console.log(pmTim.standUp("#WEB_Tim"));
+console.log(pmTim.debugsCode(studentAndy, "classes"));
 
 /*
   STRETCH PROBLEM (no tests!)
